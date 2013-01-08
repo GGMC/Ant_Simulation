@@ -63,24 +63,6 @@ float ant_posy = 2;
 float ant_size = 4;
 float ant_angley = 180;
 
-// advanced image load (also JPEG and PNG)
-SDL_Surface *load_image( std::string filename ) { 
-	//The image that's loaded 
-	SDL_Surface* loadedImage = NULL; 
-	//The optimized image that will be used 
-	SDL_Surface* optimizedImage = NULL; 
-	//Load the image using SDL_image 
-	loadedImage = IMG_Load( filename.c_str() ); 
-	//If the image loaded 
-	if( loadedImage != NULL ) { 
-		//Create an optimized image 
-		optimizedImage = SDL_DisplayFormat( loadedImage ); 
-		//Free the old image 
-		SDL_FreeSurface( loadedImage ); 
-	} //Return the optimized image 
-	return optimizedImage; 
-}
-
 void move_ants()
 {
 	int velocity = (round_cnt%450)/45;	 
@@ -117,15 +99,15 @@ void init()
 	gluPerspective(45,(1.0*screen_width)/screen_height,1.0,5000.0);
 	glMatrixMode(GL_MODELVIEW);
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_FOG);
+	//glEnable(GL_FOG);
 	glFogi(GL_FOG_MODE,GL_LINEAR);
 	glFogf(GL_FOG_START,100.0);
 	glFogf(GL_FOG_END,800.0);
 	float fog_color[] = {0.8,0.8,1.0,0.7};
 	glFogfv(GL_FOG_COLOR,fog_color);
 	init_skybox();
-	tex_border=load_texture("src/border.bmp", false);
 	tex_board=load_texture("src/grass.bmp", false);
+	tex_border=load_texture_png("src/border.png", 1024, 1024, false);
 
 	for (int cnt = 0; cnt < ant_number; cnt++)
 	{
@@ -201,7 +183,7 @@ int main(int argc, char** argv)
 						case SDLK_n:
 							FPS = max(FPS-20,10); break;						
 						case SDLK_m:
-							FPS = min(FPS+20,100); break;
+							FPS = min(FPS+20,1000); break;
 						case SDLK_ESCAPE:
 							running = false; break;
 						default:

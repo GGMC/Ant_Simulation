@@ -68,12 +68,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
+    <ClInclude Include="lodepng.h" />
     <ClInclude Include="models.h" />
     <ClInclude Include="skybox.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ant_Sim.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="lodepng.cpp" />
     <ClCompile Include="models.cpp" />
     <ClCompile Include="skybox.cpp" />
   </ItemGroup>

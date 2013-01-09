@@ -115,7 +115,7 @@ void draw_ant(int size)
 {
  glBegin(GL_QUADS);
   // head
-  glColor3f(0.0,0.0,0.0);
+  glColor4f(0.0,0.0,0.0,1.0);
   glVertex3f(0.0,0.0,0.0);
   glVertex3f(0.35*size,0.0,0.0);
   glVertex3f(0.35*size,0.35*size,0.0);

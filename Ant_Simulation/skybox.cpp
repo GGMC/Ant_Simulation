@@ -12,11 +12,11 @@ unsigned int skybox[6]; //the ids for the textures
 //load all of the textures, to the skybox array
 void init_skybox()
 {
-    skybox[SKY_LEFT]=load_texture_png("src/left2.png", 512,256,true);
-    skybox[SKY_BACK]=load_texture_png("src/back2.png", 512,256,true);
-    skybox[SKY_RIGHT]=load_texture_png("src/right2.png", 512,256,true);
-    skybox[SKY_FRONT]=load_texture_png("src/front2.png", 512,256,true);
-    skybox[SKY_TOP]=load_texture_png("src/top2.png", 512,512,true);
+    skybox[SKY_LEFT]=load_texture_png("src/left.png", 512,256,true);
+    skybox[SKY_BACK]=load_texture_png("src/back.png", 512,256,true);
+    skybox[SKY_RIGHT]=load_texture_png("src/right.png", 512,256,true);
+    skybox[SKY_FRONT]=load_texture_png("src/front.png", 512,256,true);
+    skybox[SKY_TOP]=load_texture_png("src/top.png", 512,512,true);
     skybox[SKY_BOTTOM]=load_texture("src/grass.bmp", true);
 }
 
@@ -82,7 +82,8 @@ void draw_skybox(float size)
         glVertex3f(size/2,-size/2,-size/2);
     glEnd();
     glBindTexture(GL_TEXTURE_2D,skybox[SKY_TOP]);          
-    glBegin(GL_QUADS);                      //top face
+    glBegin(GL_QUADS);                     
+	//top face
         glTexCoord2f(1,0);
         glVertex3f(size/2,size/2,size/2);
         glTexCoord2f(0,0);
@@ -154,9 +155,8 @@ unsigned int load_texture_png(const char* filename, unsigned width, unsigned hei
     unsigned int num;       //the id for the texture
     glGenTextures(1,&num);  //we generate a unique one
 	//and use the texture, we have just generated
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
-	glDisable(GL_ALPHA_TEST);
+	glEnable(GL_ALPHA_TEST);
+	glAlphaFunc(GL_GREATER,0.5);
     glBindTexture(GL_TEXTURE_2D,num);       
 	//if the texture is smaller, than the image, we get the avarege of the pixels next to it
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
